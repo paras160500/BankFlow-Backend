@@ -1,19 +1,19 @@
 // ────────────────────────────────────────────────────────────────────────
-//                            Import Statements
+//                         Import/ Init Statements
 // ────────────────────────────────────────────────────────────────────────
+
 const express = require("express");
-const authRouter = require("./routes/auth.routes");
-
-const app = express();
+const {
+  userRegisterController,
+  userLoginControoler,
+} = require("../controllers/auth.controllers");
+const router = express.Router();
 
 // ────────────────────────────────────────────────────────────────────────
-//                            Logic Statements
+//                          Routing Logic
 // ────────────────────────────────────────────────────────────────────────
 
-// Middlewares
-app.use(express.json());
+router.post("/register", userRegisterController);
+router.post("/login", userLoginControoler);
 
-// Routers
-app.use("/api/auth", authRouter);
-
-module.exports = app;
+module.exports = router;
