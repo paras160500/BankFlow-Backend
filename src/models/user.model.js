@@ -30,6 +30,12 @@ const userSchema = new mongoose.Schema(
       minlength: [6, "Password should be atleast 6 chars."],
       select: false, // We dont need password in anywhere
     },
+    systemUser: {
+      type: Boolean,
+      default: false,
+      immutable: true,
+      select: false,
+    },
   },
   {
     timestamps: true,
@@ -41,15 +47,15 @@ const userSchema = new mongoose.Schema(
 // ────────────────────────────────────────────────────────────────────────
 
 // What happen while saving the userSchema to the database
-userSchema.pre("save", async function (next) {
+userSchema.pre("save", async function () {
   // If the password is not changed
   if (!this.isModified("password")) {
-    return next();
+    return;
   }
   // If password change get the hash and then set it as password
   const hash = await bcrypt.hash(this.password, 10);
   this.password = hash;
-  return next();
+  return;
 });
 
 // ────────────────────────────────────────────────────────────────────────

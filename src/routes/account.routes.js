@@ -1,25 +1,22 @@
 // ────────────────────────────────────────────────────────────────────────
-//                            Import Statements
+//                         Import/ Init Statements
 // ────────────────────────────────────────────────────────────────────────
 const express = require("express");
-const authRouter = require("./routes/auth.routes");
-const accountRouter = require("./routes/account.routes");
-const transactionRouter = require("./routes/transaction.routes");
-const cookieParser = require("cookie-parser");
+const { authMiddleWare } = require("../middleware/auth.middleware");
+const {
+  createAccount,
+  getUserAccountsController,
+  getAccountBalance,
+} = require("../controllers/account.controller");
 
-const app = express();
+const router = express.Router();
 
 // ────────────────────────────────────────────────────────────────────────
-//                            Logic Statements
+//                          Routing Logic
 // ────────────────────────────────────────────────────────────────────────
 
-// Middlewares
-app.use(express.json());
-app.use(cookieParser());
+router.post("/", authMiddleWare, createAccount);
+router.get("/", authMiddleWare, getUserAccountsController);
+router.get("/balance/:accountId", authMiddleWare, getAccountBalance);
 
-// Routers
-app.use("/api/auth", authRouter);
-app.use("/api/accounts", accountRouter);
-app.use("/api/transactions", transactionRouter);
-
-module.exports = app;
+module.exports = router;

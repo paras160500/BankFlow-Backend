@@ -14,6 +14,6 @@ const PORT = process.env.PORT;
 // ────────────────────────────────────────────────────────────────────────
 
 app.listen(PORT, () => {
-  // connectDB();
+  connectDB();
   console.log("Server running on ", PORT);
 });
