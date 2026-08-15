@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 // Routers
-app.use("/", (req, res) => {
+app.get("/", (req, res) => {
   res.status(201).json({
     success: true,
     message: "Its working....",
