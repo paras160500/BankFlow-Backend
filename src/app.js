@@ -18,6 +18,12 @@ app.use(express.json());
 app.use(cookieParser());
 
 // Routers
+app.use("/", (req, res) => {
+  res.status(201).json({
+    success: true,
+    message: "Its working....",
+  });
+});
 app.use("/api/auth", authRouter);
 app.use("/api/accounts", accountRouter);
 app.use("/api/transactions", transactionRouter);
