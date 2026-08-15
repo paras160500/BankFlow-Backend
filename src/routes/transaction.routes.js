@@ -9,6 +9,7 @@ const {
 const {
   createTransaction,
   createInitialFundsTransaction,
+  getUserTransactions,
 } = require("../controllers/transaction.controller");
 const router = express.Router();
 
@@ -22,5 +23,6 @@ router.post(
   authSystemUserMiddleware,
   createInitialFundsTransaction,
 );
+router.get("/", authMiddleWare, getUserTransactions);
 
 module.exports = router;

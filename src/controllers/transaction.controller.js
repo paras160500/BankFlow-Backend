@@ -334,4 +334,40 @@ const createTransaction = async (req, res) => {
   }
 };
 
-module.exports = { createTransaction, createInitialFundsTransaction };
+const getUserTransactions = async (req, res) => {
+  try {
+    const accounts = await accountModel
+      .find({ user: req.user._id })
+      .select("_id");
+
+    const accountIds = accounts.map((account) => account._id);
+
+    const transactions = await transactionModel
+      .find({
+        $or: [
+          { fromAccount: { $in: accountIds } },
+          { toAccount: { $in: accountIds } },
+        ],
+      })
+      .sort({ createdAt: -1 })
+      .populate("fromAccount")
+      .populate("toAccount");
+
+    res.status(200).json({
+      success: true,
+      transactions,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Unable to retrieve transactions",
+      error: error.message,
+    });
+  }
+};
+
+module.exports = {
+  createTransaction,
+  createInitialFundsTransaction,
+  getUserTransactions,
+};
