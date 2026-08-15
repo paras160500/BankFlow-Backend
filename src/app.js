@@ -6,6 +6,7 @@ const authRouter = require("./routes/auth.routes");
 const accountRouter = require("./routes/account.routes");
 const transactionRouter = require("./routes/transaction.routes");
 const cookieParser = require("cookie-parser");
+const cors = require("cors");
 
 const app = express();
 
@@ -16,6 +17,16 @@ const app = express();
 // Middlewares
 app.use(express.json());
 app.use(cookieParser());
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://your-frontend.vercel.app",
+      "https://bankflowdash-3uguoeae.manus.space",
+    ],
+    credentials: true,
+  }),
+);
 
 // Routers
 app.get("/", (req, res) => {
