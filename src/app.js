@@ -23,6 +23,7 @@ app.use(
       "http://localhost:5173",
       "https://your-frontend.vercel.app",
       "https://bankflowdash-3uguoeae.manus.space",
+      "https://3000-ibwsqfrhk2sopb0xabhru-19fe7248.us3.manus.computer/",
     ],
     credentials: true,
   }),
