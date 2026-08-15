@@ -20,7 +20,7 @@ See balances, move funds, and trust that every transfer is recorded — once, co
 
 <br/>
 
-![Architecture Diagram](diagramSample.png)
+![Architecture Diagram](diagram.png)
 
 > ### 🧵 Attribution
 > The **frontend UI** for BankFlow (`bankflowdash-3uguoeae.manus.space`) was generated and scaffolded using **[Manus](https://manus.im)**, an AI agent platform — it is not hand-built original design work. The **backend** (Node.js/Express/MongoDB, API design, security model, and data flow) is the original engineering work of this project. Please keep this distinction in mind when evaluating or reusing this repository.
